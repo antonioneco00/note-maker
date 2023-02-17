@@ -1,0 +1,211 @@
+<div class="flex items-center h-full">
+  <form
+    class="flex flex-col w-1/2 h-5/6 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 p-4 m-0 m-auto rounded-lg ring-2 ring-honey-dark"
+    (ngSubmit)="noteId ? edit() : save()"
+  >
+    <input
+      type="text"
+      name="title"
+      placeholder="Título de la nota..."
+      class="bg-transparent text-3xl text-center rounded-md"
+      [(ngModel)]="note.title"
+      required
+      #title="ngModel"
+      [ngClass]="{
+        'border-2 border-red-500': title.invalid && title.touched && title.dirty
+      }"
+    />
+    <span
+      *ngIf="title.invalid && title.touched && title.dirty"
+      class="text-sm text-red-600"
+      >Debes introducir un título</span
+    >
+    <textarea
+      name="content"
+      cols="30"
+      rows="10"
+      placeholder="Insertar contenido..."
+      class="bg-transparent h-full rounded-md my-2"
+      id="content"
+      [(ngModel)]="note.content"
+      required
+      #content="ngModel"
+      [ngClass]="{
+        'border-2 border-red-500':
+          content.invalid && content.touched && content.dirty
+      }"
+      (keypress)="insertNewLine($event)"
+    ></textarea>
+    <span
+      *ngIf="content.invalid && content.touched && content.dirty"
+      class="text-sm text-red-600"
+      >Debes añadir contenido a la nota</span
+    >
+    <div class="flex justify-evenly">
+      <div class="flex gap-x-3">
+        <button (click)="addTags('b')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/text-bold.png"
+            alt="Texto en negrita"
+          />
+        </button>
+  
+        <button (click)="addTags('i')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/text-italic.png"
+            alt="Texto en cursiva"
+          />
+        </button>
+  
+        <button (click)="addTags('u')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/text-underline.png"
+            alt="Texto subrayado"
+          />
+        </button>
+  
+        <button (click)="addTags('del')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/text-strikethrough.png"
+            alt="Texto tachado"
+          />
+        </button>
+      </div>
+  
+      <div class="flex gap-x-3">
+        <button type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <label for="color" class="cursor-pointer">
+            <img
+              src="../../../assets/images/text-color.png"
+              alt="Texto con color"
+            />
+            <input
+              type="color"
+              name="color"
+              id="color"
+              [(ngModel)]="color"
+              class="opacity-0 h-0 absolute"
+              (ngModelChange)="changeColor($event)"
+              (change)="addTags('span', 'color', true)"
+              list="colors"
+            />
+            <datalist id="colors">
+              <option>#ff0000</option>
+              <option>#ffff00</option>
+              <option>#00ff00</option>
+              <option>#00ffff</option>
+              <option>#0000ff</option>
+              <option>#ff00ff</option>
+              <option>#ffffff</option>
+              <option>#000000</option>
+            </datalist>
+          </label>
+        </button>
+  
+        <button type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <label for="bgColor" class="cursor-pointer">
+            <img
+              src="../../../assets/images/text-background-color.png"
+              alt="Texto con color de fondo"
+            />
+            <input
+              type="color"
+              name="bgColor"
+              id="bgColor"
+              [(ngModel)]="color"
+              class="opacity-0 h-0 absolute"
+              (ngModelChange)="changeColor($event)"
+              (change)="addTags('span', 'background-color', true)"
+              list="colors"
+            />
+            <datalist id="colors">
+              <option>#ff0000</option>
+              <option>#ffff00</option>
+              <option>#00ff00</option>
+              <option>#00ffff</option>
+              <option>#0000ff</option>
+              <option>#ff00ff</option>
+              <option>#ffffff</option>
+              <option>#000000</option>
+            </datalist>
+          </label>
+        </button>
+  
+        <button type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <label for="shadowColor" class="cursor-pointer">
+            <img
+              src="../../../assets/images/text-shadow.png"
+              alt="Texto con color de sombra"
+            />
+            <input
+              type="color"
+              name="shadowColor"
+              id="shadowColor"
+              [(ngModel)]="color"
+              class="opacity-0 h-0 absolute"
+              (ngModelChange)="changeColor($event)"
+              (change)="addTags('span', 'text-shadow', true)"
+              list="colors"
+            />
+            <datalist id="colors">
+              <option>#ff0000</option>
+              <option>#ffff00</option>
+              <option>#00ff00</option>
+              <option>#00ffff</option>
+              <option>#0000ff</option>
+              <option>#ff00ff</option>
+              <option>#ffffff</option>
+              <option>#000000</option>
+            </datalist>
+          </label>
+        </button>
+      </div>
+  
+      <div class="flex gap-x-3">
+        <img src="../../../assets/images/text-size.png" alt="Tamaño de texto" class="bg-honey ring-2 ring-honey-dark rounded-md p-1"/>
+        <input
+          type="range"
+          min="10"
+          max="50"
+          name="fontSize"
+          id="fontSize"
+          [(ngModel)]="size"
+          (ngModelChange)="changeSize($event)"
+          (change)="addTags('span', 'font-size', false)"
+        />
+      </div>
+  
+      <div class="flex gap-x-3">
+        <button (click)="addList('ul')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/list-unordered.png"
+            alt="Lista desordenada"
+          />
+        </button>
+  
+        <button (click)="addList('ol')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
+          <img
+            src="../../../assets/images/list-ordered.png"
+            alt="Lista ordenada"
+          />
+        </button>
+      </div>
+    </div>
+  
+    <div class="flex justify-evenly dark:text-black mt-4">
+      <button
+        class="w-1/3 bg-honey rounded-lg ring-2 ring-honey-dark"
+        [disabled]="title.invalid || content.invalid"
+        [ngClass]="{ 'opacity-50': title.invalid || content.invalid }"
+      >
+        {{ noteId ? "Actualizar" : "Crear" }}
+      </button>
+      <button
+        class="w-1/3 bg-honey-dark rounded-lg ring-2 ring-amber-600"
+        [routerLink]="['/home', {page: backPage}]"
+      >
+        Volver
+      </button>
+    </div>
+  </form>
+</div>

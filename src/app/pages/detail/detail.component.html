@@ -1,0 +1,56 @@
+<div class="flex h-full">
+  <div
+    class="flex flex-col w-1/2 h-5/6 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 p-4 m-0 m-auto rounded-lg ring-2 ring-honey-dark"
+  >
+    <h1 class="text-4xl text-center font-bold" [innerHTML]="note.title"></h1>
+    <div
+      class="h-full overflow-y-scroll my-2"
+      [innerHTML]="note.content | noSanitize"
+    ></div>
+    <div class="self-center mb-2">
+      <h3 *ngIf="timerActive" class="text-2xl text-center">Realizando {{ note.title }}</h3>
+      <h3 *ngIf="!timerActive" class="text-2xl text-center">
+        {{
+          note.duration
+            ? "Actividad realizada en " + note.duration + " segundos"
+            : "Realizar actividad"
+        }}
+      </h3>
+      <div class="flex justify-between w-52 my-1 m-auto">
+        <button *ngIf="!timerActive" (click)="start()" class="dark:bg-honey dark:ring-2 dark:ring-honey-dark dark:rounded-md p-1">
+          <img src="../../../assets/images/play.png" alt="Iniciar actividad" />
+        </button>
+        <button *ngIf="timerActive" (click)="stop()" class="dark:bg-honey dark:ring-2 dark:ring-honey-dark dark:rounded-md p-1">
+          <img src="../../../assets/images/pause.png" alt="Pausar" />
+        </button>
+        <div class="text-2xl mt-1">{{ durationFormat || "00:00:00" }}</div>
+        <button *ngIf="!timerActive && note.duration > 0" (click)="clear()" class="dark:bg-honey dark:ring-2 dark:ring-honey-dark dark:rounded-md p-1">
+          <img src="../../../assets/images/stop.png" alt="Limpiar" />
+        </button>
+        <button *ngIf="timerActive || note.duration === 0" class="dark:bg-honey dark:ring-2 dark:ring-honey-dark dark:rounded-md opacity-50 p-1 cursor-default">
+          <img src="../../../assets/images/stop.png" alt="Limpiar" />
+        </button>
+      </div>
+    </div>
+    <div class="flex justify-around dark:text-black">
+      <button
+        [routerLink]="['/edit-note', noteId]"
+        class="w-1/4 bg-honey self-center rounded-lg ring-2 ring-honey-dark"
+      >
+        Editar
+      </button>
+      <button
+        [routerLink]="['/home', { page: backPage }]"
+        class="w-1/4 bg-honey-dark self-center rounded-lg ring-2 ring-amber-600"
+      >
+        Volver
+      </button>
+      <button
+        (click)="deleteNote(noteId)"
+        class="w-1/4 bg-amber-600 self-center rounded-lg ring-2 ring-amber-900"
+      >
+        Eliminar
+      </button>
+    </div>
+  </div>
+</div>

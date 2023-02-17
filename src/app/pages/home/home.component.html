@@ -1,0 +1,19 @@
+<div class="flex justify-around items-center w-full h-full">
+  <app-arrow [left]="true" [page]="page" class="h-3/4"></app-arrow>
+  <section
+    class="grid grid-cols-3 justify-items-center items-center w-10/12 h-full"
+    id="home"
+  >
+    <app-note
+      *ngFor="let note of notesArray"
+      [id]="note.id"
+      [title]="note.title"
+      [content]="note.content"
+      (deleteNote)="deleteNote(note.id)"
+    ></app-note>
+    <app-note
+      *ngFor="let x of [].constructor(emptyNotes)"
+    ></app-note>
+  </section>
+  <app-arrow [page]="page" [fullPage]="fullPage" class="h-3/4"></app-arrow>
+</div>

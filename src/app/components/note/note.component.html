@@ -1,0 +1,29 @@
+<article
+  *ngIf="id"
+  class="flex flex-col justify-between w-96 h-72 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg p-4 ring-2 ring-honey-dark"
+>
+  <h2 class="text-3xl font-semibold text-center">{{ title }}</h2>
+  <div class="h-full overflow-hidden my-2" [innerHTML]="content | noSanitize"></div>
+
+  <div class="flex justify-between dark:text-black">
+    <button [routerLink]="['/edit-note', id]">
+      <img src="../../../assets/images/edit.png" alt="Editar nota" />
+    </button>
+    <button [routerLink]="['/note', id]" class="bg-honey rounded-lg px-3 pt-0.5 ring-2 ring-honey-dark">
+      Ver nota
+    </button>
+    <button (click)="this.deleteNote.emit(id)" class="dark:bg-honey dark:ring-2 dark:ring-honey-dark dark:rounded-md">
+      <img src="../../../assets/images/trash.png" alt="Eliminar nota" />
+    </button>
+  </div>
+</article>
+
+<article
+  *ngIf="!id"
+  class="flex flex-col justify-around items-center w-96 h-72 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg ring-2 ring-honey-dark opacity-60 hover:opacity-100 hover:scale-105 transition duration-150 cursor-pointer"
+  routerLink="/create-note"
+>
+  <h2 class="text-3xl">Añade</h2>
+  <img src="../../../assets/images/add.png" alt="Añadir nota" class="h-fit" />
+  <h2 class="text-3xl">una nota</h2>
+</article>

@@ -1,1 +1,12 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Honey';
+    src: url('assets/font/honey/HoneyScript-SemiBold.ttf');
+}
+
+*:focus-visible {
+    outline: none;
+}
