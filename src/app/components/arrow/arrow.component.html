@@ -1,22 +1,26 @@
-<div
-  *ngIf="page"
-  class="flex items-center h-full bg-gradient-to-r from-amber-100 to-zinc-200 dark:from-slate-900 dark:to-amber-900 ring-2 ring-honey-dark rounded-sm opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
-  [routerLink]="['/home', { page: page }]"
->
-  <img
-    src="../../../assets/images/arrow.png"
-    alt="Ver más notas"
-    [ngClass]="{ 'rotate-180': left }"
-  />
-</div>
-
-<div
-  *ngIf="!page"
-  class="flex items-center h-full bg-gradient-to-r from-amber-100 to-zinc-200 dark:from-slate-900 dark:to-amber-900 ring-2 ring-honey-dark rounded-sm opacity-30"
->
-  <img
-    src="../../../assets/images/arrow.png"
-    alt="Ver más notas"
-    [ngClass]="{ 'rotate-180': left }"
-  />
+<div class="myxl:h-128 myxl:w-max md:w-80 w-full">
+  <div
+    *ngIf="page"
+    class="flex items-center myxl:h-128 bg-gradient-to-r from-amber-100 to-zinc-200 dark:from-slate-900 dark:to-amber-900 ring-2 ring-honey-dark rounded-sm opacity-75 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-pointer"
+    [routerLink]="['/home', { page: page }]"
+  >
+    <img
+      src="../../../assets/images/arrow.png"
+      alt="Ver más notas"
+      [ngClass]="{ 'rotate-180': left }"
+      class="m-auto"
+    />
+  </div>
+  
+  <div
+    *ngIf="!page"
+    class="flex items-center myxl:h-128 bg-gradient-to-r from-amber-100 to-zinc-200 dark:from-slate-900 dark:to-amber-900 ring-2 ring-honey-dark rounded-sm opacity-30"
+  >
+    <img
+      src="../../../assets/images/arrow.png"
+      alt="Ver más notas"
+      [ngClass]="{ 'rotate-180': left }"
+      class="m-auto"
+    />
+  </div>
 </div>

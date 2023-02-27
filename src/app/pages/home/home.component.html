@@ -1,19 +1,47 @@
-<div class="flex justify-around items-center w-full h-full">
-  <app-arrow [left]="true" [page]="page" class="h-3/4"></app-arrow>
-  <section
-    class="grid grid-cols-3 justify-items-center items-center w-10/12 h-full"
-    id="home"
+<div [ngSwitch]="this.screenService.getSize()" class="w-full h-full">
+  <div
+    *ngSwitchCase="'(min-width: 1440px)'"
+    class="flex justify-around items-center w-full h-full"
   >
-    <app-note
-      *ngFor="let note of notesArray"
-      [id]="note.id"
-      [title]="note.title"
-      [content]="note.content"
-      (deleteNote)="deleteNote(note.id)"
-    ></app-note>
-    <app-note
-      *ngFor="let x of [].constructor(emptyNotes)"
-    ></app-note>
-  </section>
-  <app-arrow [page]="page" [fullPage]="fullPage" class="h-3/4"></app-arrow>
+    <app-arrow [left]="true" [page]="page" class="h-128"></app-arrow>
+    <section
+      class="grid grid-cols-3 myxl:gap-0 gap-y-4 myxl:my-0 my-4 justify-items-center items-center w-10/12 h-full"
+      id="home"
+    >
+      <app-note
+        *ngFor="let note of notesArray"
+        [id]="note.id"
+        [title]="note.title"
+        [content]="note.content"
+        (deleteNote)="deleteNote(note.id)"
+        class="md:w-fit w-full"
+      ></app-note>
+      <app-note *ngFor="let x of [].constructor(emptyNotes)"></app-note>
+    </section>
+    <app-arrow [page]="page" [fullPage]="fullPage" class="h-128"></app-arrow>
+  </div>
+
+  <div
+    *ngSwitchDefault
+    class="flex flex-col justify-around items-center w-full"
+  >
+    <section
+      class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 myxl:gap-0 myxl:my-0 justify-items-center items-center myxl:w-10/12 w-full"
+      id="home"
+    >
+      <app-note
+        *ngFor="let note of notesArray"
+        [id]="note.id"
+        [title]="note.title"
+        [content]="note.content"
+        (deleteNote)="deleteNote(note.id)"
+        class="md:w-fit w-full"
+      ></app-note>
+      <app-note *ngFor="let x of [].constructor(emptyNotes)" class="md:w-fit w-full"></app-note>
+    </section>
+    <div class="flex md:w-fit w-full">
+      <app-arrow [left]="true" [page]="page" class="md:w-fit w-1/2"></app-arrow>
+      <app-arrow [page]="page" [fullPage]="fullPage" class="md:w-fit w-1/2"></app-arrow>
+    </div>
+  </div>
 </div>

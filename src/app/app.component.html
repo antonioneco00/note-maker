@@ -1,6 +1,10 @@
-<div class="flex flex-col h-screen bg-hex dark:bg-hex-dark" id="root">
-    <app-header></app-header>
-    <div class="h-full" id="routerContainer">
-        <router-outlet></router-outlet>
-    </div>
+<div
+  class="flex flex-col bg-hex dark:bg-hex-dark"
+  [ngClass]="{'xl:h-screen': this.router.url.match('/home'), 'h-screen': !this.router.url.match('/home')}"
+  id="root"
+>
+  <app-header></app-header>
+  <div class="h-full" id="routerContainer">
+    <router-outlet></router-outlet>
+  </div>
 </div>

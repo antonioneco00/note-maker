@@ -1,6 +1,6 @@
 <article
   *ngIf="id"
-  class="flex flex-col justify-between w-96 h-72 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg p-4 ring-2 ring-honey-dark"
+  class="flex flex-col justify-between xl:w-96 lg:w-80 md:w-96 w-11/12 myxl:h-72 h-60 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg p-4 myxl:my-0 my-6 m-auto ring-2 ring-honey-dark"
 >
   <h2 class="text-3xl font-semibold text-center">{{ title }}</h2>
   <div class="h-full overflow-hidden my-2" [innerHTML]="content | noSanitize"></div>
@@ -20,7 +20,7 @@
 
 <article
   *ngIf="!id"
-  class="flex flex-col justify-around items-center w-96 h-72 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg ring-2 ring-honey-dark opacity-60 hover:opacity-100 hover:scale-105 transition duration-150 cursor-pointer"
+  class="flex flex-col justify-around items-center xl:w-96 lg:w-80 md:w-96 w-11/12 myxl:h-72 h-60 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 rounded-lg myxl:my-0 my-6 m-auto ring-2 ring-honey-dark opacity-60 hover:opacity-100 hover:scale-105 transition duration-150 cursor-pointer"
   routerLink="/create-note"
 >
   <h2 class="text-3xl">Añade</h2>
