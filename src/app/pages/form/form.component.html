@@ -1,6 +1,6 @@
 <div class="flex items-center justify-center h-full">
   <form
-    class="flex flex-col w-1/2 h-5/6 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 p-4 m-0 m-auto rounded-lg ring-2 ring-honey-dark"
+    class="flex flex-col xl:w-1/2 sm:w-3/4 w-11/12 h-5/6 bg-amber-100 dark:bg-slate-900 dark:text-amber-100 p-4 m-0 m-auto rounded-lg ring-2 ring-honey-dark"
     (ngSubmit)="noteId ? edit() : save()"
   >
     <input
@@ -41,7 +41,7 @@
       class="text-sm text-red-600"
       >Debes añadir contenido a la nota</span
     >
-    <div class="flex justify-evenly">
+    <div class="lg:flex lg:justify-evenly grid grid-cols-2 justify-items-center gap-y-4">
       <div class="flex gap-x-3">
         <button (click)="addTags('b')" type="button" class="bg-honey ring-2 ring-honey-dark rounded-md p-1">
           <img
