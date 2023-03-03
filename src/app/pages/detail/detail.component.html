@@ -11,9 +11,13 @@
       <h3 *ngIf="timerActive" class="text-2xl text-center">Realizando {{ note.title }}</h3>
       <h3 *ngIf="!timerActive" class="text-2xl text-center">
         {{
-          note.duration
-            ? "Actividad realizada en " + note.duration + " segundos"
-            : "Realizar actividad"
+          this.durationData.hours
+            ? "Actividad realizada en " + this.durationData.hours + " horas, " + this.durationData.minutes + " minutos y " + this.durationData.seconds + " segundos"
+            : this.durationData.minutes
+              ? "Actividad realizada en " + this.durationData.minutes + " minutos y " + this.durationData.seconds + " segundos"
+              : this.durationData.seconds
+                ? "Actividad realizada en " + this.durationData.seconds + " segundos"
+                : "Realizar actividad"
         }}
       </h3>
       <div class="flex justify-between w-52 my-1 m-auto">

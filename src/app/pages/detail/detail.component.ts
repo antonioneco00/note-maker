@@ -13,6 +13,11 @@ export class DetailComponent implements OnDestroy {
   noteId: number;
   note: Note;
   durationFormat: string;
+  durationData = {
+    seconds: 0,
+    minutes: 0,
+    hours: 0,
+  };
   timer: NodeJS.Timer;
   timerActive: boolean;
 
@@ -23,19 +28,28 @@ export class DetailComponent implements OnDestroy {
   ) {
     this.noteId = parseInt(this.route.snapshot.paramMap.get('id')!);
     this.note = this.noteService.getNote(this.noteId);
-    this.durationFormat = new Date(this.note.duration * 1000).toISOString().slice(11, 19);
+    this.durationFormat = new Date(this.note.duration * 1000)
+      .toISOString()
+      .slice(11, 19);
+    this.durationData = {
+      seconds: new Date(this.note.duration * 1000).getSeconds(),
+      minutes: new Date(this.note.duration * 1000).getMinutes(),
+      hours: new Date(this.note.duration * 1000).getHours() - 1,
+    };
     this.backPage = localStorage.getItem('page')!;
   }
 
   increase(): void {
-    this.durationFormat = new Date(this.note.duration * 1000).toISOString().slice(11, 19);
-  
+    this.durationFormat = new Date(this.note.duration * 1000)
+      .toISOString()
+      .slice(11, 19);
+
     this.note.duration++;
   }
-  
+
   start(): void {
     this.timerActive = true;
-    
+
     this.increase();
 
     this.timer = setInterval(() => this.increase(), 1000);
@@ -43,22 +57,36 @@ export class DetailComponent implements OnDestroy {
 
   stop(): void {
     this.note.duration--;
-    
+
     this.timerActive = false;
-    
+
     clearInterval(this.timer);
+
+    this.durationData = {
+      seconds: new Date(this.note.duration * 1000).getSeconds(),
+      minutes: new Date(this.note.duration * 1000).getMinutes(),
+      hours: new Date(this.note.duration * 1000).getHours() - 1,
+    };
 
     this.noteService.updateNote(this.note);
   }
-  
+
   clear(): void {
     this.timerActive = false;
-    
+
     clearInterval(this.timer);
 
     this.note.duration = 0;
-    
-    this.durationFormat = new Date(this.note.duration * 1000).toISOString().slice(11, 19);
+
+    this.durationData = {
+      seconds: 0,
+      minutes: 0,
+      hours: 0
+    };
+
+    this.durationFormat = new Date(this.note.duration * 1000)
+      .toISOString()
+      .slice(11, 19);
 
     this.noteService.updateNote(this.note);
   }
