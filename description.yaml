@@ -1,0 +1,13 @@
+en:
+  title: Note Maker
+  description: >
+    This is a Notes app built with Angular 15 and TypeScript, designed as a single-page application (SPA) with TailwindCSS for styling. 
+    It allows users to format text with bold, italic, underline, text color, background color, and shadow effects. Additionally, users can adjust text size and work with lists. 
+    All notes are stored in the localStorage, ensuring they persist even after closing and reopening the browser.  
+
+es:
+  title: Bloc de Notas
+  description: >
+    Este es un Bloc de notas creado con Angular 15 y TypeScript, diseñado como una aplicación de una sola página (SPA) con TailwindCSS para los estilos. 
+    Permite dar formato al texto con negrita, cursiva, subrayado, color de texto, color de fondo y efectos de sombra. Además, los usuarios pueden ajustar el tamaño del texto y trabajar con listas. 
+    Todas las notas se almacenan en el localStorage, lo que garantiza que se mantendrán incluso después de cerrar y volver a abrir el navegador.    
